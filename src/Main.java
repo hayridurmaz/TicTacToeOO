@@ -58,7 +58,7 @@ public class Main {
 
 			tahta.oyunTahtasiYazdir();
 			if (tahta.kazanan(o1.harf)) {
-				System.out.println(o1.kullaniciAdiAl() + " "+o2.karakteriAl()+" karakteriyle KAZANDI!");
+				System.out.println(o1.kullaniciAdiAl() + " "+o1.karakteriAl()+" karakteriyle KAZANDI!");
 				break;
 			}
 			if (tahta.beraberlikKontrol()) {
@@ -90,6 +90,7 @@ public class Main {
 
 		}
 
+		System.out.println(tahta.oyunKaydet(o1, o2));
 		scan.close();
 	}
 

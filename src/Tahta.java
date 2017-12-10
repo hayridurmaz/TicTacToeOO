@@ -1,27 +1,29 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 public class Tahta {
 	char[][] oyunTahtasi;
-	//int[] kazananKontrolX, kazananKontrolO;
-	int N,toplamHamleCount;
+	// int[] kazananKontrolX, kazananKontrolO;
+	int N, toplamHamleCount;
 	int currentI, currentJ;
 
 	public Tahta(int n) {
 		oyunTahtasi = new char[n][n];
-		toplamHamleCount=0;
-//		kazananKontrolX = new int[n + n + 2];
-//		kazananKontrolO = new int[n + n + 2];
+		toplamHamleCount = 0;
+		// kazananKontrolX = new int[n + n + 2];
+		// kazananKontrolO = new int[n + n + 2];
 		N = n;
 	}
 
 	public Tahta(char[][] oTahtasi) {
 		oyunTahtasi = oTahtasi;
-		toplamHamleCount=getToplamHamleCount(oTahtasi);
-//		kazananKontrolX = new int[oTahtasi.length + oTahtasi.length + 2];
-//		kazananKontrolO = new int[oTahtasi.length + oTahtasi.length + 2];
+		toplamHamleCount = getToplamHamleCount(oTahtasi);
+		// kazananKontrolX = new int[oTahtasi.length + oTahtasi.length + 2];
+		// kazananKontrolO = new int[oTahtasi.length + oTahtasi.length + 2];
 		N = oTahtasi.length;
 	}
-
-
 
 	public char[][] oyunTahtasiAl() {
 		return oyunTahtasi;
@@ -91,28 +93,28 @@ public class Tahta {
 			}
 
 			// win kontrol
-//			if (oyuncu == 'X') {
-//				xCount++;
-////				kazananKontrolX[i]++;
-////				kazananKontrolX[j + N]++;
-////				if (i == j) {
-////					kazananKontrolX[2 * N]++;
-////				}
-////				if (N - 1 - j == i) {
-////					kazananKontrolX[2 * N + 1]++;
-////				}
-//			}
-//			if (oyuncu == 'O') {
-//				oCount++;
-////				kazananKontrolO[i]++;
-////				kazananKontrolO[j + N]++;
-////				if (i == j) {
-////					kazananKontrolO[2 * N]++;
-////				}
-////				if (N - 1 - j == i) {
-////					kazananKontrolO[2 * N + 1]++;
-////				}
-//			}
+			// if (oyuncu == 'X') {
+			// xCount++;
+			//// kazananKontrolX[i]++;
+			//// kazananKontrolX[j + N]++;
+			//// if (i == j) {
+			//// kazananKontrolX[2 * N]++;
+			//// }
+			//// if (N - 1 - j == i) {
+			//// kazananKontrolX[2 * N + 1]++;
+			//// }
+			// }
+			// if (oyuncu == 'O') {
+			// oCount++;
+			//// kazananKontrolO[i]++;
+			//// kazananKontrolO[j + N]++;
+			//// if (i == j) {
+			//// kazananKontrolO[2 * N]++;
+			//// }
+			//// if (N - 1 - j == i) {
+			//// kazananKontrolO[2 * N + 1]++;
+			//// }
+			// }
 			toplamHamleCount++;
 			currentI = i;
 			currentJ = j;
@@ -317,15 +319,40 @@ public class Tahta {
 	public boolean beraberlikKontrol() {
 		return toplamHamleCount == Math.pow(N, 2);
 	}
+
 	private static int getToplamHamleCount(char[][] oTahtasi) {
-		int count=0;
+		int count = 0;
 		for (int i = 0; i < oTahtasi.length; i++) {
 			for (int j = 0; j < oTahtasi[i].length; j++) {
-				if(oTahtasi[i][j]!=Character.MIN_VALUE){
+				if (oTahtasi[i][j] != Character.MIN_VALUE) {
 					count++;
 				}
 			}
 		}
 		return count;
+	}
+
+	public boolean oyunKaydet(Oyuncu o1, Oyuncu o2) {
+		try {
+			File file = new File("oyunKayit.txt");// create matchs
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+
+			FileWriter fw = new FileWriter(file, true);
+			PrintWriter pw = new PrintWriter(fw);
+			pw.write("SA");
+			pw.close();
+			// File dosya = new File("src\\oyunKayit.txt");
+			// System.out.println(dosya.getAbsolutePath());
+			// FileWriter yazici = new FileWriter(dosya);
+			// BufferedWriter yaz = new BufferedWriter(yazici);
+			// yaz.write("SA");
+			// yaz.close();
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
 	}
 }
