@@ -1,5 +1,6 @@
-import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
@@ -334,19 +335,46 @@ public class Tahta {
 
 	public boolean oyunKaydet(Oyuncu o1, Oyuncu o2) {
 		try {
-			File file = new File("TicTacToeOO/oyunKayit.txt");// create matchs
+			File file = new File("TicTacToeOO/oyunKayit.txt");// DÝKKATET!!!!!!
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			if (!br.readLine().equals("NOGAMES")) {
+				System.out.println("Zaten kayýtlý bir oyun var!");
+				br.close();
+				return false;
+			}
+			br.close();
+
 			FileWriter fw = new FileWriter(file, true);
 			PrintWriter pw = new PrintWriter(fw);
-			pw.write("AAA");
+			String yazýlacak = "";
+			yazýlacak += N + "\n" + toplamHamleCount + "\n" + currentI + "\n" + currentJ + "\n";
+			yazýlacak += o1.kullaniciAdiAl() + "\n" + o1.harf + "\n" + o1.insanmiKontrolu + "\n";
+			yazýlacak += o2.kullaniciAdiAl() + "\n" + o2.harf + "\n" + o2.insanmiKontrolu + "\n";
+			yazýlacak += "TAHTA\n";
+
+			for (int i = 0; i < oyunTahtasi.length; i++) {
+				for (int j = 0; j < oyunTahtasi[i].length; j++) {
+					yazýlacak += oyunTahtasi[i][j] + " ";
+				}
+				yazýlacak = yazýlacak + "\n";
+			}
+
+			pw.write(yazýlacak);
 			pw.close();
 			return true;
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.err.println("Dosyaya yazarken hata!");
 			return false;
 		}
+	}
+
+	public boolean kayitliOyunAl() {
+		// TODO: Not implemented!
+		return false;
 	}
 }
