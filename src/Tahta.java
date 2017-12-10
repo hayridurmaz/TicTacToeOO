@@ -341,7 +341,7 @@ public class Tahta {
 
 			FileWriter fw = new FileWriter(file, true);
 			PrintWriter pw = new PrintWriter(fw);
-			pw.write("SA");
+			pw.write("AAA");
 			pw.close();
 			// File dosya = new File("src\\oyunKayit.txt");
 			// System.out.println(dosya.getAbsolutePath());
