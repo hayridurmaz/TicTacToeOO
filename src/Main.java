@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
+		// Driver methodu.
 		Scanner scan = new Scanner(System.in);
 		Tahta tahta;
 		Oyuncu o1, o2;
@@ -14,12 +15,13 @@ public class Main {
 
 		String hamle1, hamle2;
 		tahta = Tahta.kayitliOyunAl();
-		if (oyunSecenek.equals("1") && tahta != null) {
+		if (oyunSecenek.equals("1") && tahta != null) { // Kayýtlý oyun varsa
+														// kayýtlý oyunu al
 			o1 = tahta.oyuncu1Al();
 			o2 = tahta.oyuncu2Al();
 			tahta.oyunTahtasiYazdir();
 
-		} else {
+		} else {// Yeni oyuna baþla
 			System.out.println("Yeni oyun kurulumu\nKullanýcý Adýnýzý giriniz: ");
 			String kAdi = scan.next();
 			System.out
@@ -116,8 +118,6 @@ public class Main {
 			}
 
 		}
-
-		// System.out.println(tahta.oyunKaydet(o1, o2));
 		scan.close();
 	}
 

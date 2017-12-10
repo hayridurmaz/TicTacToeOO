@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 public class Oyuncu {
+	/*
+	 * Bu Class Oyuncu'larý temsil etmektedir.
+	 */
 
 	char harf;
 	boolean insanmiKontrolu;
@@ -9,6 +12,7 @@ public class Oyuncu {
 	Scanner scan = new Scanner(System.in);
 
 	public Oyuncu(Tahta t) {
+		// Sadece oyun tahtasý parametresi alan yapýcý
 		harf = 'X';
 		insanmiKontrolu = true;
 		kullaniciAdi = "SÝZ";
@@ -16,6 +20,7 @@ public class Oyuncu {
 	}
 
 	public Oyuncu(String kAdi, Tahta t) {
+		// Kullanýcý adýný ve oyun tahtasýný parametre olarak alan yapýcý
 		harf = 'X';
 		insanmiKontrolu = true;
 		kullaniciAdi = kAdi;
@@ -23,6 +28,7 @@ public class Oyuncu {
 	}
 
 	public Oyuncu(boolean insanmi, Tahta t) {
+		// insanMý kontrolünü ve oyun tahtasýný parametre olarak alan yapýcý.
 		insanmiKontrolu = insanmi;
 		tahta = t;
 
@@ -36,12 +42,14 @@ public class Oyuncu {
 	}
 
 	public Oyuncu(boolean insanmi, char harf, Tahta t) {
+		// insanMý kontrolünü ve seçilen harfi parametre olarak alan yapýcý
 		this.insanmiKontrolu = insanmi;
 		this.harf = harf;
 		this.tahta = t;
 	}
 
 	public Oyuncu(String kadi, boolean insanmi, char harf, Tahta t) {
+		// Kullanýcý adýný, insanMý kontrolünü ve harfi alan yapýcý.
 		this.insanmiKontrolu = insanmi;
 		this.harf = harf;
 		this.tahta = t;
@@ -68,6 +76,7 @@ public class Oyuncu {
 	}
 
 	String insanOyuncuHamlesiniKotrol() {
+		// Oyuncunun hamlesini okuyup döndüren method
 		System.out.println("Lütfen hamlenizi giriniz: (Oyunu kaydetmek için \"KAYDET\" yazýnýz)");
 		String hamle = scan.nextLine();
 		if (hamle.equalsIgnoreCase("KAYDET")) {
@@ -77,6 +86,7 @@ public class Oyuncu {
 	}
 
 	String bilgisayarHamlesiUret() {
+		// random bir bilgisayar hamlesi üreten method.
 		int n = tahta.oyunTahtasiAl().length;
 		int i = randomWithRange(0, n - 1);
 		int j = randomWithRange(0, n - 1);
@@ -86,6 +96,7 @@ public class Oyuncu {
 	}
 
 	static int randomWithRange(int min, int max) {
+		// random bir sayý üreten method.
 		int range = (max - min) + 1;
 		return (int) (Math.random() * range) + min;
 	}
