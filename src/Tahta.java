@@ -1,29 +1,33 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class Tahta {
 	char[][] oyunTahtasi;
 	// int[] kazananKontrolX, kazananKontrolO;
 	int N, toplamHamleCount;
 	int currentI, currentJ;
+	Oyuncu oyuncu1, oyuncu2;
 
 	public Tahta(int n) {
 		oyunTahtasi = new char[n][n];
 		toplamHamleCount = 0;
-		// kazananKontrolX = new int[n + n + 2];
-		// kazananKontrolO = new int[n + n + 2];
 		N = n;
 	}
 
 	public Tahta(char[][] oTahtasi) {
 		oyunTahtasi = oTahtasi;
 		toplamHamleCount = getToplamHamleCount(oTahtasi);
-		// kazananKontrolX = new int[oTahtasi.length + oTahtasi.length + 2];
-		// kazananKontrolO = new int[oTahtasi.length + oTahtasi.length + 2];
 		N = oTahtasi.length;
+	}
+
+	public void oyuncuEkle(Oyuncu o1, Oyuncu o2) {
+		this.oyuncu1 = o1;
+		this.oyuncu2 = o2;
 	}
 
 	public char[][] oyunTahtasiAl() {
@@ -51,6 +55,10 @@ public class Tahta {
 	}
 
 	public boolean hamleyiYaz(String koordinat, char oyuncu, boolean insanmi) {
+//		if(koordinat.equalsIgnoreCase("KAYDET")){
+//			oyunKaydet(oyuncu1, oyuncu2);
+//			return false;
+//		}
 		if (koordinat.length() != 2) {
 			System.err.println("Yanlýþ input girdiniz. Girdi örneði: \"A1\"");
 			return false;
@@ -92,30 +100,6 @@ public class Tahta {
 			if (oyunTahtasi[i][j] != Character.MIN_VALUE) {
 				return false;
 			}
-
-			// win kontrol
-			// if (oyuncu == 'X') {
-			// xCount++;
-			//// kazananKontrolX[i]++;
-			//// kazananKontrolX[j + N]++;
-			//// if (i == j) {
-			//// kazananKontrolX[2 * N]++;
-			//// }
-			//// if (N - 1 - j == i) {
-			//// kazananKontrolX[2 * N + 1]++;
-			//// }
-			// }
-			// if (oyuncu == 'O') {
-			// oCount++;
-			//// kazananKontrolO[i]++;
-			//// kazananKontrolO[j + N]++;
-			//// if (i == j) {
-			//// kazananKontrolO[2 * N]++;
-			//// }
-			//// if (N - 1 - j == i) {
-			//// kazananKontrolO[2 * N + 1]++;
-			//// }
-			// }
 			toplamHamleCount++;
 			currentI = i;
 			currentJ = j;
@@ -123,8 +107,6 @@ public class Tahta {
 			return true;
 		} catch (Exception e) {
 			System.err.println("Yanlýþ input girdiniz. Girdi örneði: \"A1\"");
-			// System.err.println("Bir þeyler yanlýþ gitti");
-			// System.out.println(e.getMessage());
 			return false;
 		}
 
@@ -333,6 +315,13 @@ public class Tahta {
 		return count;
 	}
 
+	public Oyuncu oyuncu1Al(){
+		return oyuncu1;
+	}
+	public Oyuncu oyuncu2Al(){
+		return oyuncu2;
+	}
+	
 	public boolean oyunKaydet(Oyuncu o1, Oyuncu o2) {
 		try {
 			File file = new File("TicTacToeOO/oyunKayit.txt");// DÝKKATET!!!!!!
@@ -347,6 +336,7 @@ public class Tahta {
 				br.close();
 				return false;
 			}
+			dosyayiTemizle(file,"");
 			br.close();
 
 			FileWriter fw = new FileWriter(file, true);
@@ -368,13 +358,110 @@ public class Tahta {
 			pw.close();
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.err.println("Dosyaya yazarken hata!");
 			return false;
 		}
 	}
 
-	public boolean kayitliOyunAl() {
-		// TODO: Not implemented!
-		return false;
+	private static boolean dosyayiTemizle(File file, String str) {
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(file);
+			writer.print(str);
+			writer.close();
+			return true;
+		} catch (FileNotFoundException e) {
+			System.err.println("Dosyayý temizlerken hata");
+			e.printStackTrace();// SONRADAN SÝL
+			return false;
+		}
+	}
+
+	public static Tahta kayitliOyunAl() {
+		try {
+			File file = new File("TicTacToeOO/oyunKayit.txt");// DÝKKATET!!!!!!
+			if (!file.exists()) {
+				System.err.println("Kayýtlý oyun bulunamadý");
+				return null;
+			}
+
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			String firstLine=br.readLine();
+			if (firstLine.equals("NOGAMES")) {
+				System.out.println("Kayýtlý oyun bulunamadý!");
+				br.close();
+				return null;
+			}
+			String line;
+			ArrayList<String> Satirlar = new ArrayList<>();
+			Satirlar.add(firstLine);
+			while ((line = br.readLine()) != null) {
+				Satirlar.add(line);
+			}
+			br.close();
+			int n = Integer.parseInt(Satirlar.get(0));
+			System.out.println(n);
+			char[][] kaydedilenCharArray = new char[n][n];
+			int index = 11;
+			for (int i = 0; i < kaydedilenCharArray.length; i++) {
+				String str = Satirlar.get(index);
+				System.out.println(str);
+				System.out.println(kaydedilenCharArray[i].length);
+				for (int j = 0; j < kaydedilenCharArray[i].length; j++) {
+					System.out.println("j:"+j);
+					char temp = str.charAt(2*j);
+					if(temp==' '){
+						temp=Character.MIN_VALUE;
+					}
+					
+					kaydedilenCharArray[i][j] =temp;
+				}
+				index++;
+			}
+			Tahta t = new Tahta(kaydedilenCharArray);
+			t.toplamHamleCount = Integer.parseInt(Satirlar.get(1).trim());
+			t.currentI = Integer.parseInt(Satirlar.get(2).trim());
+			t.currentJ = Integer.parseInt(Satirlar.get(3).trim());
+			Oyuncu o1 = new Oyuncu(Satirlar.get(4), Boolean.parseBoolean(Satirlar.get(6).trim()),
+					Satirlar.get(5).charAt(0), t);
+			Oyuncu o2 = new Oyuncu(Satirlar.get(7), Boolean.parseBoolean(Satirlar.get(9).trim()),
+					Satirlar.get(8).charAt(0), t);
+
+			t.oyuncuEkle(o1, o2);
+			dosyayiTemizle(file, "NOGAMES");
+			return t;
+
+			// FileWriter fw = new FileWriter(file, true);
+			// PrintWriter pw = new PrintWriter(fw);
+			// String yazýlacak = "";
+			// yazýlacak += N + "\n" + toplamHamleCount + "\n" + currentI + "\n"
+			// + currentJ + "\n";
+			// yazýlacak += o1.kullaniciAdiAl() + "\n" + o1.harf + "\n" +
+			// o1.insanmiKontrolu + "\n";
+			// yazýlacak += o2.kullaniciAdiAl() + "\n" + o2.harf + "\n" +
+			// o2.insanmiKontrolu + "\n";
+			// yazýlacak += "TAHTA\n";
+			//
+			// for (int i = 0; i < oyunTahtasi.length; i++) {
+			// for (int j = 0; j < oyunTahtasi[i].length; j++) {
+			// yazýlacak += oyunTahtasi[i][j] + " ";
+			// }
+			// yazýlacak = yazýlacak + "\n";
+			// }
+			//
+			// pw.write(yazýlacak);
+			// pw.close();
+			// return true;
+			// } catch (Exception e) {
+			// e.printStackTrace();
+			// System.err.println("Dosyaya yazarken hata!");
+			// return false;
+		} catch (Exception e) {
+			System.err.println("Kayýtlý oyun alýnýrken hata");
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

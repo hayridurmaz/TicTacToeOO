@@ -69,6 +69,9 @@ public class Oyuncu {
 	String insanOyuncuHamlesiniKotrol() {
 		System.out.println("Lütfen hamlenizi giriniz: ");
 		String hamle = scan.nextLine();
+		if(hamle.equalsIgnoreCase("KAYDET")){
+			return hamle;
+		}
 		return hamle + " " + harf;
 	}
 
