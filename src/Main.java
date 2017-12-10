@@ -47,7 +47,6 @@ public class Main {
 		// System.out.println(hamle2);
 		while (true) {
 			hamle1 = o1.oyuncununHamlesiniAl();
-			int currentI, currentJ;
 			try {
 				boolean hamleDogrumu = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.substring(3).charAt(0),
 						o1.insanmiKontrolu);
@@ -66,10 +65,6 @@ public class Main {
 				System.out.println(o1.harf + " KAZANDI!");
 				break;
 			}
-			// if (tahta.kazanan('O')) {
-			// System.out.println("O KAZANDI!");
-			// break;
-			// }
 			if (tahta.beraberlikKontrol()) {
 				System.out.println("BERABERE");
 				break;
@@ -87,31 +82,17 @@ public class Main {
 			} catch (Exception e) {
 				System.err.println("Birþeyler yanlýþ gitti, Bilgisayar input hatasý?");
 			}
-
-			// tahta.hamleyiYaz(hamle2.substring(0,2),
-			// hamle2.substring(3).charAt(0),o2.insanmiKontrolu);
 			tahta.oyunTahtasiYazdir();
 			if (tahta.kazanan(o2.harf)) {
 				System.out.println(o2.harf + " KAZANDI!");
 				break;
 			}
-			// if (tahta.kazanan('O')) {
-			// System.out.println("O KAZANDI!");
-			// break;
-			// }
 			if (tahta.beraberlikKontrol()) {
 				System.out.println("BERABERE");
 				break;
 			}
 
 		}
-
-		// System.out.println(hamle1);
-		// System.out.println(hamle2);
-		// tahta.hamleyiYaz(hamle1.substring(0,2),
-		// hamle1.substring(3).charAt(0),o1.insanmiKontrolu);
-		// tahta.hamleyiYaz(hamle2.substring(0,2),
-		// hamle2.substring(3).charAt(0),o2.insanmiKontrolu);
 
 		scan.close();
 	}
