@@ -334,7 +334,7 @@ public class Tahta {
 
 	public boolean oyunKaydet(Oyuncu o1, Oyuncu o2) {
 		try {
-			File file = new File("oyunKayit.txt");// create matchs
+			File file = new File("TicTacToeOO/oyunKayit.txt");// create matchs
 			if (!file.exists()) {
 				file.createNewFile();
 			}
