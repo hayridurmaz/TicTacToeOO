@@ -55,10 +55,10 @@ public class Tahta {
 	}
 
 	public boolean hamleyiYaz(String koordinat, char oyuncu, boolean insanmi) {
-//		if(koordinat.equalsIgnoreCase("KAYDET")){
-//			oyunKaydet(oyuncu1, oyuncu2);
-//			return false;
-//		}
+		// if(koordinat.equalsIgnoreCase("KAYDET")){
+		// oyunKaydet(oyuncu1, oyuncu2);
+		// return false;
+		// }
 		if (koordinat.length() != 2) {
 			System.err.println("Yanlýþ input girdiniz. Girdi örneði: \"A1\"");
 			return false;
@@ -315,13 +315,14 @@ public class Tahta {
 		return count;
 	}
 
-	public Oyuncu oyuncu1Al(){
+	public Oyuncu oyuncu1Al() {
 		return oyuncu1;
 	}
-	public Oyuncu oyuncu2Al(){
+
+	public Oyuncu oyuncu2Al() {
 		return oyuncu2;
 	}
-	
+
 	public boolean oyunKaydet(Oyuncu o1, Oyuncu o2) {
 		try {
 			File file = new File("TicTacToeOO/oyunKayit.txt");// DÝKKATET!!!!!!
@@ -336,7 +337,7 @@ public class Tahta {
 				br.close();
 				return false;
 			}
-			dosyayiTemizle(file,"");
+			dosyayiTemizle(file, "");
 			br.close();
 
 			FileWriter fw = new FileWriter(file, true);
@@ -388,7 +389,7 @@ public class Tahta {
 
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
-			String firstLine=br.readLine();
+			String firstLine = br.readLine();
 			if (firstLine.equals("NOGAMES")) {
 				System.out.println("Kayýtlý oyun bulunamadý!");
 				br.close();
@@ -407,16 +408,16 @@ public class Tahta {
 			int index = 11;
 			for (int i = 0; i < kaydedilenCharArray.length; i++) {
 				String str = Satirlar.get(index);
-				//System.out.println(str);
-				//System.out.println(kaydedilenCharArray[i].length);
+				// System.out.println(str);
+				// System.out.println(kaydedilenCharArray[i].length);
 				for (int j = 0; j < kaydedilenCharArray[i].length; j++) {
-					//System.out.println("j:"+j);
-					char temp = str.charAt(2*j);
-					if(temp==' '){
-						temp=Character.MIN_VALUE;
+					// System.out.println("j:"+j);
+					char temp = str.charAt(2 * j);
+					if (temp == ' ') {
+						temp = Character.MIN_VALUE;
 					}
-					
-					kaydedilenCharArray[i][j] =temp;
+
+					kaydedilenCharArray[i][j] = temp;
 				}
 				index++;
 			}

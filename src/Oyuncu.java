@@ -25,7 +25,7 @@ public class Oyuncu {
 	public Oyuncu(boolean insanmi, Tahta t) {
 		insanmiKontrolu = insanmi;
 		tahta = t;
-		
+
 		if (insanmi) {
 			kullaniciAdi = "SÝZ";
 			harf = 'X';
@@ -51,7 +51,8 @@ public class Oyuncu {
 	public char karakteriAl() {
 		return harf;
 	}
-	public String kullaniciAdiAl(){
+
+	public String kullaniciAdiAl() {
 		return kullaniciAdi;
 	}
 
@@ -69,7 +70,7 @@ public class Oyuncu {
 	String insanOyuncuHamlesiniKotrol() {
 		System.out.println("Lütfen hamlenizi giriniz: (Oyunu kaydetmek için \"KAYDET\" yazýnýz)");
 		String hamle = scan.nextLine();
-		if(hamle.equalsIgnoreCase("KAYDET")){
+		if (hamle.equalsIgnoreCase("KAYDET")) {
 			return hamle;
 		}
 		return hamle + " " + harf;
