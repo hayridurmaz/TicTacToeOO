@@ -343,12 +343,6 @@ public class Tahta {
 			PrintWriter pw = new PrintWriter(fw);
 			pw.write("AAA");
 			pw.close();
-			// File dosya = new File("src\\oyunKayit.txt");
-			// System.out.println(dosya.getAbsolutePath());
-			// FileWriter yazici = new FileWriter(dosya);
-			// BufferedWriter yaz = new BufferedWriter(yazici);
-			// yaz.write("SA");
-			// yaz.close();
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
