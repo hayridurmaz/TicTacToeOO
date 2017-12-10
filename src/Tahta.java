@@ -129,13 +129,12 @@ public class Tahta {
 		if (N == 3) {
 			kacTaneyeBak = 3;
 		}
-		
-		
-		System.out.println("OYUNCU: "+oyuncu);
+
+		System.out.println("OYUNCU: " + oyuncu);
 		int winLook;
-		
+
 		if (oyuncu == 'X') {
-			//olmadý amkqqqqq
+			// olmadý amkqqqqq
 
 			// for (int i = 0; i < kazananKontrolX.length; i++) {
 			// // System.err.println(i+":(X) "+kazananKontrolX[i]);
@@ -146,34 +145,33 @@ public class Tahta {
 			// }
 			// return false;
 
-//			for (int xt = 0; xt < 5; xt++) {
-//				int count = 0;
-//				for (int i = xt, j = 0; i < 5 && j < 5; i++, j++) {
-//					if (oyunTahtasi[i][j] == 'X') {
-//						count++;
-//					}
-//				}
-//				if (count >= 4) {
-//					return true;
-//				}
-//			}
-//
-//			for (int xt = 0; xt < 5; xt++) {
-//				for (int i = 0, j = xt; i < 5 && j < 5; i++, j++) {
-//					System.out.println(x + " - " + y);
-//				}
-//
-//				System.out.println("---");
-//			}
-			
+			// for (int xt = 0; xt < 5; xt++) {
+			// int count = 0;
+			// for (int i = xt, j = 0; i < 5 && j < 5; i++, j++) {
+			// if (oyunTahtasi[i][j] == 'X') {
+			// count++;
+			// }
+			// }
+			// if (count >= 4) {
+			// return true;
+			// }
+			// }
+			//
+			// for (int xt = 0; xt < 5; xt++) {
+			// for (int i = 0, j = xt; i < 5 && j < 5; i++, j++) {
+			// System.out.println(x + " - " + y);
+			// }
+			//
+			// System.out.println("---");
+			// }
 
-			//System.out.println("currentI: "+currentI);
-			//System.out.println("currentJ: "+currentJ);
-			
-			//aþaðý doðru bakýyor
+			// System.out.println("currentI: "+currentI);
+			// System.out.println("currentJ: "+currentJ);
+
+			// aþaðý doðru bakýyor
 			winLook = 0;
 			for (int i = 0; i < N; i++) {
-				//System.out.println("winlook "+winLook);
+				// System.out.println("winlook "+winLook);
 
 				if (oyunTahtasi[i][currentJ] == 'X')
 					winLook++;
@@ -184,10 +182,9 @@ public class Tahta {
 					return true;
 			}
 
-			//saðdan sola doðru bakýyor
+			// saðdan sola doðru bakýyor
 			winLook = 0;
 			for (int j = 0; j < N; j++) {
-				
 
 				if (oyunTahtasi[currentI][j] == 'X')
 					winLook++;
@@ -196,11 +193,10 @@ public class Tahta {
 				}
 				if (winLook == kacTaneyeBak)
 					return true;
-				
+
 			}
 
-
-			//sað üstten sol alta bakýyor
+			// sað üstten sol alta bakýyor
 			winLook = 0;
 			for (int i = currentI, j = currentJ; i >= 0 && j >= 0; i--, j--) {
 
@@ -213,7 +209,7 @@ public class Tahta {
 					return true;
 
 			}
-			if(oyunTahtasi[currentI][currentJ]=='X'){
+			if (oyunTahtasi[currentI][currentJ] == 'X') {
 				winLook--;
 			}
 			for (int i = currentI, j = currentJ; i < N && j < N; i++, j++) {
@@ -223,11 +219,11 @@ public class Tahta {
 				} else {
 					winLook = 0;
 				}
-				if (winLook == kacTaneyeBak+1)
+				if (winLook == kacTaneyeBak + 1)
 					return true;
 			}
-			
-			//sol üstten sað alta bakýyor
+
+			// sol üstten sað alta bakýyor
 			winLook = 0;
 			for (int i = currentI, j = currentJ; i >= 0 && j < N; i--, j++) {
 
@@ -236,12 +232,12 @@ public class Tahta {
 				} else {
 					winLook = 0;
 				}
-				//System.out.println("winlook "+winLook);
+				// System.out.println("winlook "+winLook);
 				if (winLook == kacTaneyeBak)
 					return true;
 
 			}
-			if(oyunTahtasi[currentI][currentJ]=='X'){
+			if (oyunTahtasi[currentI][currentJ] == 'X') {
 				winLook--;
 			}
 			for (int i = currentI, j = currentJ; i < N && j >= 0; i++, j--) {
@@ -251,28 +247,28 @@ public class Tahta {
 				} else {
 					winLook = 0;
 				}
-				//System.out.println("winlook "+winLook);
+				// System.out.println("winlook "+winLook);
 				if (winLook == kacTaneyeBak)
 					return true;
 			}
 			return false;
 
 		} else {
-//			if (oCount < N) {
-//				return false;
-//			} else {
-//				for (int i = 0; i < kazananKontrolO.length; i++) {
-//					// System.err.println(i+":(O) "+kazananKontrolO[i]);
-//					if (kazananKontrolO[i] == N) {
-//						return true;
-//					}
-//				}
-//				return false;
-//			}
-			//aþaðý doðru bakýyor
+			// if (oCount < N) {
+			// return false;
+			// } else {
+			// for (int i = 0; i < kazananKontrolO.length; i++) {
+			// // System.err.println(i+":(O) "+kazananKontrolO[i]);
+			// if (kazananKontrolO[i] == N) {
+			// return true;
+			// }
+			// }
+			// return false;
+			// }
+			// aþaðý doðru bakýyor
 			winLook = 0;
 			for (int i = 0; i < N; i++) {
-				//System.out.println("winlook "+winLook);
+				// System.out.println("winlook "+winLook);
 
 				if (oyunTahtasi[i][currentJ] == 'O')
 					winLook++;
@@ -283,10 +279,9 @@ public class Tahta {
 					return true;
 			}
 
-			//saðdan sola doðru bakýyor
+			// saðdan sola doðru bakýyor
 			winLook = 0;
 			for (int j = 0; j < N; j++) {
-				
 
 				if (oyunTahtasi[currentI][j] == 'O')
 					winLook++;
@@ -295,11 +290,10 @@ public class Tahta {
 				}
 				if (winLook == kacTaneyeBak)
 					return true;
-				
+
 			}
 
-
-			//sað üstten sol alta bakýyor
+			// sað üstten sol alta bakýyor
 			winLook = 0;
 			for (int i = currentI, j = currentJ; i >= 0 && j >= 0; i--, j--) {
 
@@ -312,7 +306,7 @@ public class Tahta {
 					return true;
 
 			}
-			if(oyunTahtasi[currentI][currentJ]=='O'){
+			if (oyunTahtasi[currentI][currentJ] == 'O') {
 				winLook--;
 			}
 			for (int i = currentI, j = currentJ; i < N && j < N; i++, j++) {
@@ -322,11 +316,11 @@ public class Tahta {
 				} else {
 					winLook = 0;
 				}
-				if (winLook == kacTaneyeBak+1)
+				if (winLook == kacTaneyeBak + 1)
 					return true;
 			}
-			
-			//sol üstten sað alta bakýyor
+
+			// sol üstten sað alta bakýyor
 			winLook = 0;
 			for (int i = currentI, j = currentJ; i >= 0 && j < N; i--, j++) {
 
@@ -335,12 +329,12 @@ public class Tahta {
 				} else {
 					winLook = 0;
 				}
-				//System.out.println("winlook "+winLook);
+				// System.out.println("winlook "+winLook);
 				if (winLook == kacTaneyeBak)
 					return true;
 
 			}
-			if(oyunTahtasi[currentI][currentJ]=='O'){
+			if (oyunTahtasi[currentI][currentJ] == 'O') {
 				winLook--;
 			}
 			for (int i = currentI, j = currentJ; i < N && j >= 0; i++, j--) {
@@ -350,7 +344,7 @@ public class Tahta {
 				} else {
 					winLook = 0;
 				}
-				//System.out.println("winlook "+winLook);
+				// System.out.println("winlook "+winLook);
 				if (winLook == kacTaneyeBak)
 					return true;
 			}

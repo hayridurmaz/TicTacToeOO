@@ -25,7 +25,7 @@ public class Oyuncu {
 	public Oyuncu(boolean insanmi, Tahta t) {
 		insanmiKontrolu = insanmi;
 		tahta = t;
-		kullaniciAdi="BOÞ";
+		kullaniciAdi = "BOÞ";
 		if (insanmi) {
 			harf = 'X';
 		} else {
@@ -38,11 +38,12 @@ public class Oyuncu {
 		this.harf = harf;
 		this.tahta = t;
 	}
+
 	public Oyuncu(String kadi, boolean insanmi, char harf, Tahta t) {
 		this.insanmiKontrolu = insanmi;
 		this.harf = harf;
 		this.tahta = t;
-		this.kullaniciAdi=kadi;
+		this.kullaniciAdi = kadi;
 	}
 
 	public char karakteriAl() {
@@ -63,7 +64,7 @@ public class Oyuncu {
 	String insanOyuncuHamlesiniKotrol() {
 		System.out.println("Lütfen hamlenizi giriniz: ");
 		String hamle = scan.nextLine();
-		return hamle+" "+harf;
+		return hamle + " " + harf;
 	}
 
 	String bilgisayarHamlesiUret() {

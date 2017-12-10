@@ -7,14 +7,13 @@ public class Main {
 		System.out.println("Merhaba, Kullanýcý Adýnýzý giriniz: ");
 		String kAdi = scan.nextLine();
 		System.out.println("Oyun tahtasýnýn kaça kaçlýk olmasýný istiyorsanýz giriniz(Örneðin 3x3 için 3 giriniz): ");
-		int N=3;
-		try{
+		int N = 3;
+		try {
 			N = scan.nextInt();
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Yanlýþ input girdiniz. Tam sayý olmasý gerekiyor. Varsayýlan deðer:3 olarak girildi.");
 		}
-		
+
 		System.out.println("Seçmek istediðiniz karakteri giriniz (X / O). Otomatik seçmek için baþka bir þey giriniz");
 		String girdiKarakter = scan.next();
 
@@ -34,15 +33,13 @@ public class Main {
 			o2 = new Oyuncu(false, tahta);
 		} else {
 			o1 = new Oyuncu(kAdi, true, girdiChar, tahta);
-			if(girdiChar=='X'){
-				o2= new Oyuncu(false, tahta);
-			}
-			else{
-				o2=new Oyuncu(false,'X',tahta);
+			if (girdiChar == 'X') {
+				o2 = new Oyuncu(false, tahta);
+			} else {
+				o2 = new Oyuncu(false, 'X', tahta);
 			}
 		}
 
-		
 		String hamle1, hamle2;
 		// = o1.oyuncununHamlesiniAl();
 		// String hamle2 = o2.oyuncununHamlesiniAl();
@@ -59,20 +56,20 @@ public class Main {
 					hamleDogrumu = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.substring(3).charAt(0),
 							o1.insanmiKontrolu);
 				}
-				
+
 			} catch (Exception e) {
 				System.err.println("Yanlýþ inputn girdiniz. Girdi örneði: \"A1\"");
 			}
 
 			tahta.oyunTahtasiYazdir();
 			if (tahta.kazanan(o1.harf)) {
-				System.out.println(o1.harf+" KAZANDI!");
+				System.out.println(o1.harf + " KAZANDI!");
 				break;
 			}
-//			if (tahta.kazanan('O')) {
-//				System.out.println("O KAZANDI!");
-//				break;
-//			}
+			// if (tahta.kazanan('O')) {
+			// System.out.println("O KAZANDI!");
+			// break;
+			// }
 			if (tahta.beraberlikKontrol()) {
 				System.out.println("BERABERE");
 				break;
@@ -95,13 +92,13 @@ public class Main {
 			// hamle2.substring(3).charAt(0),o2.insanmiKontrolu);
 			tahta.oyunTahtasiYazdir();
 			if (tahta.kazanan(o2.harf)) {
-				System.out.println(o2.harf+" KAZANDI!");
+				System.out.println(o2.harf + " KAZANDI!");
 				break;
 			}
-//			if (tahta.kazanan('O')) {
-//				System.out.println("O KAZANDI!");
-//				break;
-//			}
+			// if (tahta.kazanan('O')) {
+			// System.out.println("O KAZANDI!");
+			// break;
+			// }
 			if (tahta.beraberlikKontrol()) {
 				System.out.println("BERABERE");
 				break;
