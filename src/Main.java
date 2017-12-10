@@ -13,15 +13,15 @@ public class Main {
 		}
 
 		String hamle1, hamle2;
-
-		if (oyunSecenek.equals("1")) {
-			tahta = Tahta.kayitliOyunAl();
+		tahta = Tahta.kayitliOyunAl();
+		if (oyunSecenek.equals("1") && tahta != null) {
 			o1 = tahta.oyuncu1Al();
 			o2 = tahta.oyuncu2Al();
 			tahta.oyunTahtasiYazdir();
+
 		} else {
-			System.out.println("Kullanýcý Adýnýzý giriniz: ");
-			String kAdi = scan.nextLine();
+			System.out.println("Yeni oyun kurulumu\nKullanýcý Adýnýzý giriniz: ");
+			String kAdi = scan.next();
 			System.out
 					.println("Oyun tahtasýnýn kaça kaçlýk olmasýný istiyorsanýz giriniz(Örneðin 3x3 için 3 giriniz): ");
 			int N = 3;

@@ -407,10 +407,10 @@ public class Tahta {
 			int index = 11;
 			for (int i = 0; i < kaydedilenCharArray.length; i++) {
 				String str = Satirlar.get(index);
-				System.out.println(str);
-				System.out.println(kaydedilenCharArray[i].length);
+				//System.out.println(str);
+				//System.out.println(kaydedilenCharArray[i].length);
 				for (int j = 0; j < kaydedilenCharArray[i].length; j++) {
-					System.out.println("j:"+j);
+					//System.out.println("j:"+j);
 					char temp = str.charAt(2*j);
 					if(temp==' '){
 						temp=Character.MIN_VALUE;

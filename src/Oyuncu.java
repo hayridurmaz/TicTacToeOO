@@ -67,7 +67,7 @@ public class Oyuncu {
 	}
 
 	String insanOyuncuHamlesiniKotrol() {
-		System.out.println("Lütfen hamlenizi giriniz: ");
+		System.out.println("Lütfen hamlenizi giriniz: (Oyunu kaydetmek için \"KAYDET\" yazýnýz)");
 		String hamle = scan.nextLine();
 		if(hamle.equalsIgnoreCase("KAYDET")){
 			return hamle;
