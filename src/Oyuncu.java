@@ -11,7 +11,7 @@ public class Oyuncu {
 	public Oyuncu(Tahta t) {
 		harf = 'X';
 		insanmiKontrolu = true;
-		kullaniciAdi = "BOÞ";
+		kullaniciAdi = "SÝZ";
 		tahta = t;
 	}
 
@@ -25,10 +25,12 @@ public class Oyuncu {
 	public Oyuncu(boolean insanmi, Tahta t) {
 		insanmiKontrolu = insanmi;
 		tahta = t;
-		kullaniciAdi = "BOÞ";
+		
 		if (insanmi) {
+			kullaniciAdi = "SÝZ";
 			harf = 'X';
 		} else {
+			kullaniciAdi = "PC";
 			harf = 'O';
 		}
 	}
@@ -48,6 +50,9 @@ public class Oyuncu {
 
 	public char karakteriAl() {
 		return harf;
+	}
+	public String kullaniciAdiAl(){
+		return kullaniciAdi;
 	}
 
 	boolean oyuncuTurunuAl() {

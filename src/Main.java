@@ -36,15 +36,11 @@ public class Main {
 			if (girdiChar == 'X') {
 				o2 = new Oyuncu(false, tahta);
 			} else {
-				o2 = new Oyuncu(false, 'X', tahta);
+				o2 = new Oyuncu("PC",false, 'X', tahta);
 			}
 		}
 
 		String hamle1, hamle2;
-		// = o1.oyuncununHamlesiniAl();
-		// String hamle2 = o2.oyuncununHamlesiniAl();
-		// System.out.println(hamle1);
-		// System.out.println(hamle2);
 		while (true) {
 			hamle1 = o1.oyuncununHamlesiniAl();
 			try {
@@ -62,7 +58,7 @@ public class Main {
 
 			tahta.oyunTahtasiYazdir();
 			if (tahta.kazanan(o1.harf)) {
-				System.out.println(o1.harf + " KAZANDI!");
+				System.out.println(o1.kullaniciAdiAl() + " "+o2.karakteriAl()+" karakteriyle KAZANDI!");
 				break;
 			}
 			if (tahta.beraberlikKontrol()) {
@@ -84,7 +80,7 @@ public class Main {
 			}
 			tahta.oyunTahtasiYazdir();
 			if (tahta.kazanan(o2.harf)) {
-				System.out.println(o2.harf + " KAZANDI!");
+				System.out.println(o2.kullaniciAdiAl() + " "+o2.karakteriAl()+" karakteriyle KAZANDI!");
 				break;
 			}
 			if (tahta.beraberlikKontrol()) {

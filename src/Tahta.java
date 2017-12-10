@@ -1,23 +1,27 @@
 
 public class Tahta {
 	char[][] oyunTahtasi;
-	int[] kazananKontrolX, kazananKontrolO;
-	int N, xCount = 0, oCount = 0, toplamHamleCount = 0;
+	//int[] kazananKontrolX, kazananKontrolO;
+	int N,toplamHamleCount;
 	int currentI, currentJ;
 
 	public Tahta(int n) {
 		oyunTahtasi = new char[n][n];
-		kazananKontrolX = new int[n + n + 2];
-		kazananKontrolO = new int[n + n + 2];
+		toplamHamleCount=0;
+//		kazananKontrolX = new int[n + n + 2];
+//		kazananKontrolO = new int[n + n + 2];
 		N = n;
 	}
 
 	public Tahta(char[][] oTahtasi) {
 		oyunTahtasi = oTahtasi;
-		kazananKontrolX = new int[oTahtasi.length + oTahtasi.length + 2];
-		kazananKontrolO = new int[oTahtasi.length + oTahtasi.length + 2];
+		toplamHamleCount=getToplamHamleCount(oTahtasi);
+//		kazananKontrolX = new int[oTahtasi.length + oTahtasi.length + 2];
+//		kazananKontrolO = new int[oTahtasi.length + oTahtasi.length + 2];
 		N = oTahtasi.length;
 	}
+
+
 
 	public char[][] oyunTahtasiAl() {
 		return oyunTahtasi;
@@ -87,28 +91,28 @@ public class Tahta {
 			}
 
 			// win kontrol
-			if (oyuncu == 'X') {
-				xCount++;
-				kazananKontrolX[i]++;
-				kazananKontrolX[j + N]++;
-				if (i == j) {
-					kazananKontrolX[2 * N]++;
-				}
-				if (N - 1 - j == i) {
-					kazananKontrolX[2 * N + 1]++;
-				}
-			}
-			if (oyuncu == 'O') {
-				oCount++;
-				kazananKontrolO[i]++;
-				kazananKontrolO[j + N]++;
-				if (i == j) {
-					kazananKontrolO[2 * N]++;
-				}
-				if (N - 1 - j == i) {
-					kazananKontrolO[2 * N + 1]++;
-				}
-			}
+//			if (oyuncu == 'X') {
+//				xCount++;
+////				kazananKontrolX[i]++;
+////				kazananKontrolX[j + N]++;
+////				if (i == j) {
+////					kazananKontrolX[2 * N]++;
+////				}
+////				if (N - 1 - j == i) {
+////					kazananKontrolX[2 * N + 1]++;
+////				}
+//			}
+//			if (oyuncu == 'O') {
+//				oCount++;
+////				kazananKontrolO[i]++;
+////				kazananKontrolO[j + N]++;
+////				if (i == j) {
+////					kazananKontrolO[2 * N]++;
+////				}
+////				if (N - 1 - j == i) {
+////					kazananKontrolO[2 * N + 1]++;
+////				}
+//			}
 			toplamHamleCount++;
 			currentI = i;
 			currentJ = j;
@@ -134,39 +138,6 @@ public class Tahta {
 		int winLook;
 
 		if (oyuncu == 'X') {
-			// olmadý amkqqqqq
-
-			// for (int i = 0; i < kazananKontrolX.length; i++) {
-			// // System.err.println(i+":(X) "+kazananKontrolX[i]);
-			// if (kazananKontrolX[i] >= N) {
-			// return true;
-			// }
-			//
-			// }
-			// return false;
-
-			// for (int xt = 0; xt < 5; xt++) {
-			// int count = 0;
-			// for (int i = xt, j = 0; i < 5 && j < 5; i++, j++) {
-			// if (oyunTahtasi[i][j] == 'X') {
-			// count++;
-			// }
-			// }
-			// if (count >= 4) {
-			// return true;
-			// }
-			// }
-			//
-			// for (int xt = 0; xt < 5; xt++) {
-			// for (int i = 0, j = xt; i < 5 && j < 5; i++, j++) {
-			// System.out.println(x + " - " + y);
-			// }
-			//
-			// System.out.println("---");
-			// }
-
-			// System.out.println("currentI: "+currentI);
-			// System.out.println("currentJ: "+currentJ);
 
 			// aþaðý doðru bakýyor
 			winLook = 0;
@@ -254,17 +225,7 @@ public class Tahta {
 			return false;
 
 		} else {
-			// if (oCount < N) {
-			// return false;
-			// } else {
-			// for (int i = 0; i < kazananKontrolO.length; i++) {
-			// // System.err.println(i+":(O) "+kazananKontrolO[i]);
-			// if (kazananKontrolO[i] == N) {
-			// return true;
-			// }
-			// }
-			// return false;
-			// }
+
 			// aþaðý doðru bakýyor
 			winLook = 0;
 			for (int i = 0; i < N; i++) {
@@ -353,11 +314,18 @@ public class Tahta {
 		}
 	}
 
-	public void kazandimi() {
-
-	}
-
 	public boolean beraberlikKontrol() {
 		return toplamHamleCount == Math.pow(N, 2);
+	}
+	private static int getToplamHamleCount(char[][] oTahtasi) {
+		int count=0;
+		for (int i = 0; i < oTahtasi.length; i++) {
+			for (int j = 0; j < oTahtasi[i].length; j++) {
+				if(oTahtasi[i][j]!=Character.MIN_VALUE){
+					count++;
+				}
+			}
+		}
+		return count;
 	}
 }
