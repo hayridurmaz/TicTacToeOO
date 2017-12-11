@@ -7,42 +7,53 @@ public class Main {
 		Scanner scan = new Scanner(System.in);
 		Tahta tahta;
 		Oyuncu o1, o2;
-		String oyunSecenek = "";
-		while (!(oyunSecenek.equals("1") || oyunSecenek.equals("2"))) {
-			System.out.println("Merhaba, kayýtlý bir oyun yüklemek için 1, Yeni oyun için 2 giriniz: ");
-			oyunSecenek = scan.next();
+		String menuGirdi = "";
+
+		while (!(menuGirdi.equals("1") || menuGirdi.equals("2"))) {
+			System.out.println("Hoþgeldiniz.\nMenü\n(1)Yeni Oyun\n(2)Kayýtlý oyun yükle");
+			menuGirdi = scan.next();
 		}
 
 		String hamle1, hamle2;
-		tahta = Tahta.kayitliOyunAl();
-		if (oyunSecenek.equals("1") && tahta != null) { // Kayýtlý oyun varsa
-														// kayýtlý oyunu al
-			o1 = tahta.oyuncu1Al();
-			o2 = tahta.oyuncu2Al();
-			tahta.oyunTahtasiYazdir();
+
+		if (menuGirdi.equals("2")) { // Kayýtlý oyun varsa
+			tahta = Tahta.dosyadanAktar(); // kayýtlý oyunu al
+			if (tahta == null) {
+				System.exit(0);
+			}
+			o1 = tahta.birinciOyuncuAl();
+			o2 = tahta.ikinciOyuncuAl();
+			tahta.oyunPanosuYazdir();
 
 		} else {// Yeni oyuna baþla
 			System.out.println("Yeni oyun kurulumu\nKullanýcý Adýnýzý giriniz: ");
 			String kAdi = scan.next();
-			System.out
-					.println("Oyun tahtasýnýn kaça kaçlýk olmasýný istiyorsanýz giriniz(Örneðin 3x3 için 3 giriniz): ");
+			System.out.println("Oyun tahtasý boyutu:\n(1) 3x3\n(2)5x5\n(3)7x7 ");
+			String tahtaBoyutu = scan.next();
 			int N = 3;
-			try {
-				N = scan.nextInt();
-			} catch (Exception e) {
-				System.err.println(
-						"Yanlýþ input girdiniz. Tam sayý olmasý gerekiyor. Varsayýlan deðer:3 olarak girildi.");
+			switch (tahtaBoyutu) {
+			case "1":
+				N = 3;
+				break;
+			case "2":
+				N = 5;
+				break;
+			case "3":
+				N = 7;
+				break;
+			default:
+				System.err.println("Yanlýþ girdi girdiniz");
+				System.exit(0);
 			}
 
-			System.out.println(
-					"Seçmek istediðiniz karakteri giriniz (X / O). Otomatik seçmek için baþka bir þey giriniz");
+			System.out.println("Seçmek istediðiniz karakteri giriniz:\n(1)X\n(2)O\n(3)Farketmez");
 			String girdiKarakter = scan.next();
 
 			char girdiChar;
 
-			if (girdiKarakter.equalsIgnoreCase("X")) {
+			if (girdiKarakter.equalsIgnoreCase("1")) {
 				girdiChar = 'X';
-			} else if (girdiKarakter.equalsIgnoreCase("O")) {
+			} else if (girdiKarakter.equalsIgnoreCase("2")) {
 				girdiChar = 'O';
 			} else
 				girdiChar = Character.MIN_VALUE;
@@ -64,30 +75,33 @@ public class Main {
 			tahta.oyuncuEkle(o1, o2);
 		}
 
+		tahta.oyunPanosuYazdir();
+		System.out.println("Örnek hamle: \"B1\"");
 		while (true) {
 			hamle1 = o1.oyuncununHamlesiniAl();
-			if (hamle1.equalsIgnoreCase("KAYDET")) {
-				if (tahta.oyunKaydet(o1, o2)) {
-					System.out.println("Oyun baþarýyla kaydedildi.. Görüþmek üzere..");
+			if (hamle1.equalsIgnoreCase("KAYIT")) {
+				if (tahta.oyunKayit()) {
+					System.out.println("Oyun baþarýyla kaydedildi..");
 					System.exit(0);
 				}
 			}
 			try {
-				boolean hamleDogrumu = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.substring(3).charAt(0),
+				boolean hamleKontrolu1 = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.substring(3).charAt(0),
 						o1.insanmiKontrolu);
-				while (!hamleDogrumu) {
+				while (!hamleKontrolu1) {
 					hamle1 = o1.oyuncununHamlesiniAl();
-					hamleDogrumu = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.substring(3).charAt(0),
+					hamleKontrolu1 = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.substring(3).charAt(0),
 							o1.insanmiKontrolu);
 				}
 
 			} catch (Exception e) {
-				System.err.println("Yanlýþ inputn girdiniz. Girdi örneði: \"A1\"");
+				System.err.println("Yanlýþ girdi girdiniz. Örnek hamle: \"B1\"");
 			}
 
-			tahta.oyunTahtasiYazdir();
-			if (tahta.kazanan(o1.harf)) {
-				System.out.println(o1.kullaniciAdiAl() + " " + o1.karakteriAl() + " karakteriyle KAZANDI!");
+			tahta.oyunPanosuYazdir();
+			if (tahta.galipMi(o1.karakter)) {
+				System.out.println(
+						o1.kullaniciAdiAl() + " isimli kullanýcý " + o1.karakteriAl() + " karakteriyle KAZANDI!");
 				break;
 			}
 			if (tahta.beraberlikKontrol()) {
@@ -97,19 +111,20 @@ public class Main {
 
 			hamle2 = o2.oyuncununHamlesiniAl();
 			try {
-				boolean hamleDogrumu2 = tahta.hamleyiYaz(hamle2.substring(0, 2), hamle2.substring(3).charAt(0),
+				boolean hamleKontrolu2 = tahta.hamleyiYaz(hamle2.substring(0, 2), hamle2.substring(3).charAt(0),
 						o2.insanmiKontrolu);
-				while (!hamleDogrumu2) {
+				while (!hamleKontrolu2) {
 					hamle2 = o2.oyuncununHamlesiniAl();
-					hamleDogrumu2 = tahta.hamleyiYaz(hamle2.substring(0, 2), hamle2.substring(3).charAt(0),
+					hamleKontrolu2 = tahta.hamleyiYaz(hamle2.substring(0, 2), hamle2.substring(3).charAt(0),
 							o2.insanmiKontrolu);
 				}
 			} catch (Exception e) {
-				System.err.println("Birþeyler yanlýþ gitti, Bilgisayar input hatasý?");
+				System.err.println("Birþeyler yanlýþ gitti");
 			}
-			tahta.oyunTahtasiYazdir();
-			if (tahta.kazanan(o2.harf)) {
-				System.out.println(o2.kullaniciAdiAl() + " " + o2.karakteriAl() + " karakteriyle KAZANDI!");
+			tahta.oyunPanosuYazdir();
+			if (tahta.galipMi(o2.karakter)) {
+				System.out.println(
+						o2.kullaniciAdiAl() + " isimli kullanýcý " + o2.karakteriAl() + " karakteriyle KAZANDI!");
 				break;
 			}
 			if (tahta.beraberlikKontrol()) {

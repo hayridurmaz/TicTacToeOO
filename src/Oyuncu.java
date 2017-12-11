@@ -5,23 +5,23 @@ public class Oyuncu {
 	 * Bu Class Oyuncu'larý temsil etmektedir.
 	 */
 
-	char harf;
+	char karakter;
 	boolean insanmiKontrolu;
 	String kullaniciAdi;
 	Tahta tahta;
-	Scanner scan = new Scanner(System.in);
+	Scanner scan;
 
 	public Oyuncu(Tahta t) {
 		// Sadece oyun tahtasý parametresi alan yapýcý
-		harf = 'X';
+		karakter = 'X';
 		insanmiKontrolu = true;
-		kullaniciAdi = "SÝZ";
+		kullaniciAdi = "INSAN";
 		tahta = t;
 	}
 
 	public Oyuncu(String kAdi, Tahta t) {
 		// Kullanýcý adýný ve oyun tahtasýný parametre olarak alan yapýcý
-		harf = 'X';
+		karakter = 'X';
 		insanmiKontrolu = true;
 		kullaniciAdi = kAdi;
 		tahta = t;
@@ -33,31 +33,31 @@ public class Oyuncu {
 		tahta = t;
 
 		if (insanmi) {
-			kullaniciAdi = "SÝZ";
-			harf = 'X';
+			kullaniciAdi = "INSAN";
+			karakter = 'X';
 		} else {
 			kullaniciAdi = "PC";
-			harf = 'O';
+			karakter = 'O';
 		}
 	}
 
 	public Oyuncu(boolean insanmi, char harf, Tahta t) {
 		// insanMý kontrolünü ve seçilen harfi parametre olarak alan yapýcý
 		this.insanmiKontrolu = insanmi;
-		this.harf = harf;
+		this.karakter = harf;
 		this.tahta = t;
 	}
 
 	public Oyuncu(String kadi, boolean insanmi, char harf, Tahta t) {
 		// Kullanýcý adýný, insanMý kontrolünü ve harfi alan yapýcý.
 		this.insanmiKontrolu = insanmi;
-		this.harf = harf;
+		this.karakter = harf;
 		this.tahta = t;
 		this.kullaniciAdi = kadi;
 	}
 
 	public char karakteriAl() {
-		return harf;
+		return karakter;
 	}
 
 	public String kullaniciAdiAl() {
@@ -68,31 +68,32 @@ public class Oyuncu {
 		return insanmiKontrolu;
 	}
 
+	String insanOyuncuHamlesiniKotrol() {
+		// Oyuncunun hamlesini okuyup döndüren method
+		scan = new Scanner(System.in);
+		System.out.println("Lütfen hamlenizi giriniz: (Oyunu kaydetmek için \"KAYIT\" yazýnýz)");
+		String hamle = scan.nextLine();
+		if (hamle.equalsIgnoreCase("KAYIT")) {
+			return hamle;
+		}
+		return hamle + " " + karakter;
+	}
+
+	String bilgisayarHamlesiUret() {
+		// random bir bilgisayar hamlesi üreten method.
+		int n = tahta.oyunPanosuAl().length;
+		int i = randomWithRange(0, n - 1);
+		int j = randomWithRange(0, n - 1);
+		char hucreHarf = (char) (j + 65);
+		return Character.toString(hucreHarf) + i + " " + karakter;
+
+	}
+
 	String oyuncununHamlesiniAl() {
 		if (insanmiKontrolu) {
 			return insanOyuncuHamlesiniKotrol();
 		} else
 			return bilgisayarHamlesiUret();
-	}
-
-	String insanOyuncuHamlesiniKotrol() {
-		// Oyuncunun hamlesini okuyup döndüren method
-		System.out.println("Lütfen hamlenizi giriniz: (Oyunu kaydetmek için \"KAYDET\" yazýnýz)");
-		String hamle = scan.nextLine();
-		if (hamle.equalsIgnoreCase("KAYDET")) {
-			return hamle;
-		}
-		return hamle + " " + harf;
-	}
-
-	String bilgisayarHamlesiUret() {
-		// random bir bilgisayar hamlesi üreten method.
-		int n = tahta.oyunTahtasiAl().length;
-		int i = randomWithRange(0, n - 1);
-		int j = randomWithRange(0, n - 1);
-		char hucreHarf = (char) (j + 65);
-		return Character.toString(hucreHarf) + i + " " + harf;
-
 	}
 
 	static int randomWithRange(int min, int max) {
