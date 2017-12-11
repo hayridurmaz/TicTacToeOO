@@ -148,7 +148,7 @@ public class Tahta {
 			} else {
 				galibiyetKontrol = 0;
 			}
-			// System.out.println("winlook "+winLook);
+
 			if (galibiyetKontrol == galibiyetSayisi)
 				return true;
 
