@@ -1,7 +1,9 @@
+
 import java.io.*;
 import java.util.*;
 
 public class Tahta {
+
 	/*
 	 * Bu class bir oyun tahtasýný temsil ediyor.
 	 * 
@@ -89,26 +91,28 @@ public class Tahta {
 		for (int i = 0; i < N; i++) {
 			// System.out.println("winlook "+winLook);
 
-			if (oyunPanosu[i][anlikJ] == oyuncuHarf)
+			if (oyunPanosu[i][anlikJ] == oyuncuHarf) {
 				galibiyetKontrol++;
-			else {
+			} else {
 				galibiyetKontrol = 0;
 			}
-			if (galibiyetKontrol == galibiyetSayisi)
+			if (galibiyetKontrol == galibiyetSayisi) {
 				return true;
+			}
 		}
 
 		// saðdan sola doðru bakýyor
 		galibiyetKontrol = 0;
 		for (int j = 0; j < N; j++) {
 
-			if (oyunPanosu[anlikI][j] == oyuncuHarf)
+			if (oyunPanosu[anlikI][j] == oyuncuHarf) {
 				galibiyetKontrol++;
-			else {
+			} else {
 				galibiyetKontrol = 0;
 			}
-			if (galibiyetKontrol == galibiyetSayisi)
+			if (galibiyetKontrol == galibiyetSayisi) {
 				return true;
+			}
 
 		}
 
@@ -121,11 +125,12 @@ public class Tahta {
 			} else {
 				galibiyetKontrol = 0;
 			}
-			if (galibiyetKontrol == galibiyetSayisi)
+			if (galibiyetKontrol == galibiyetSayisi) {
 				return true;
+			}
 
 		}
-		if (oyunPanosu[anlikI][anlikJ] == oyuncuHarf) {
+		if (oyunPanosu[anlikI][anlikJ] == oyuncuHarf && galibiyetKontrol != 0) {
 			galibiyetKontrol--;
 		}
 		for (int i = anlikI, j = anlikJ; i < N && j < N; i++, j++) {
@@ -135,8 +140,9 @@ public class Tahta {
 			} else {
 				galibiyetKontrol = 0;
 			}
-			if (galibiyetKontrol == galibiyetSayisi + 1)
+			if (galibiyetKontrol == galibiyetSayisi) {
 				return true;
+			}
 		}
 
 		// sol üstten sað alta bakýyor
@@ -149,11 +155,13 @@ public class Tahta {
 				galibiyetKontrol = 0;
 			}
 
-			if (galibiyetKontrol == galibiyetSayisi)
+			if (galibiyetKontrol == galibiyetSayisi) {
 				return true;
+			}
 
 		}
-		if (oyunPanosu[anlikI][anlikJ] == oyuncuHarf) {
+
+		if (oyunPanosu[anlikI][anlikJ] == oyuncuHarf && galibiyetKontrol != 0) {
 			galibiyetKontrol--;
 		}
 		for (int i = anlikI, j = anlikJ; i < N && j >= 0; i++, j--) {
@@ -164,8 +172,9 @@ public class Tahta {
 				galibiyetKontrol = 0;
 			}
 			// System.out.println("winlook "+winLook);
-			if (galibiyetKontrol == galibiyetSayisi)
+			if (galibiyetKontrol == galibiyetSayisi) {
 				return true;
+			}
 		}
 		return false;
 	}
@@ -219,7 +228,7 @@ public class Tahta {
 	public boolean oyunKayit() {
 		// Oyunu kaydeden method.
 		try {
-			File file = new File("TicTacToeOO/src/Kayit.txt");// DÝKKATET!!!!!!
+			File file = new File("src/TicTacToeOO/Kayit.txt");// DÝKKATET!!!!!!
 			if (!file.exists()) {
 				file.createNewFile();
 				dosyayaYaz(file, "KAYITLIOYUNYOK");
@@ -228,9 +237,7 @@ public class Tahta {
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
 			if (!br.readLine().equals("KAYITLIOYUNYOK")) {
-				System.out.println("Zaten kayýtlý bir oyun var!");
-				br.close();
-				return false;
+				System.out.println("Zaten kayýtlý bir oyun var! Kayýtlý Oyun silinecek!!!");
 			}
 			dosyayaYaz(file, "");
 			br.close();
@@ -242,7 +249,7 @@ public class Tahta {
 			pw.close();
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 			System.err.println("Dosyaya yazarken hata!");
 			return false;
 		}
@@ -274,7 +281,7 @@ public class Tahta {
 			return true;
 		} catch (FileNotFoundException e) {
 			System.err.println("Dosyaya yazarken hata");
-			e.printStackTrace();// SONRADAN SÝL
+			// e.printStackTrace();
 			return false;
 		}
 	}
@@ -282,7 +289,7 @@ public class Tahta {
 	public static Tahta dosyadanAktar() {
 		// Kayýtlý oyunu programa aktaran method.
 		try {
-			File file = new File("TicTacToeOO/src/Kayit.txt");// DÝKKATET!!!!!!
+			File file = new File("/TicTacToeOO/src/Kayit.txt");
 			if (!file.exists()) {
 				System.err.println("Kayýtlý oyun bulunamadý");
 				return null;

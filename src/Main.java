@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Main {
@@ -28,7 +29,7 @@ public class Main {
 		} else {// Yeni oyuna baþla
 			System.out.println("Yeni oyun kurulumu\nKullanýcý Adýnýzý giriniz: ");
 			String kAdi = scan.next();
-			System.out.println("Oyun tahtasý boyutu:\n(1) 3x3\n(2)5x5\n(3)7x7 ");
+			System.out.println("Oyun tahtasý boyutu:\n(1)3x3\n(2)5x5\n(3)7x7 ");
 			String tahtaBoyutu = scan.next();
 			int N = 3;
 			switch (tahtaBoyutu) {
@@ -55,13 +56,14 @@ public class Main {
 				girdiChar = 'X';
 			} else if (girdiKarakter.equalsIgnoreCase("2")) {
 				girdiChar = 'O';
-			} else
+			} else {
 				girdiChar = Character.MIN_VALUE;
+			}
 
 			tahta = new Tahta(N);
 			// o1, o2;
 			if (girdiChar == Character.MIN_VALUE) {
-				o1 = new Oyuncu(true, tahta);
+				o1 = new Oyuncu(kAdi, true, tahta);
 				o2 = new Oyuncu(false, tahta);
 			} else {
 				o1 = new Oyuncu(kAdi, true, girdiChar, tahta);
@@ -86,16 +88,22 @@ public class Main {
 				}
 			}
 			try {
-				boolean hamleKontrolu1 = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.substring(3).charAt(0),
-						o1.insanmiKontrolu);
+				boolean hamleKontrolu1 = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.charAt(3), o1.insanmiKontrolu);
 				while (!hamleKontrolu1) {
 					hamle1 = o1.oyuncununHamlesiniAl();
-					hamleKontrolu1 = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.substring(3).charAt(0),
-							o1.insanmiKontrolu);
+					if (hamle1.equalsIgnoreCase("KAYIT")) {
+						if (tahta.oyunKayit()) {
+							System.out.println("Oyun baþarýyla kaydedildi..");
+							System.exit(0);
+						}
+					}
+					hamleKontrolu1 = tahta.hamleyiYaz(hamle1.substring(0, 2), hamle1.charAt(3), o1.insanmiKontrolu);
 				}
 
 			} catch (Exception e) {
+				// e.printStackTrace();
 				System.err.println("Yanlýþ girdi girdiniz. Örnek hamle: \"B1\"");
+				continue;
 			}
 
 			tahta.oyunPanosuYazdir();
@@ -111,12 +119,10 @@ public class Main {
 
 			hamle2 = o2.oyuncununHamlesiniAl();
 			try {
-				boolean hamleKontrolu2 = tahta.hamleyiYaz(hamle2.substring(0, 2), hamle2.substring(3).charAt(0),
-						o2.insanmiKontrolu);
+				boolean hamleKontrolu2 = tahta.hamleyiYaz(hamle2.substring(0, 2), hamle2.charAt(3), o2.insanmiKontrolu);
 				while (!hamleKontrolu2) {
 					hamle2 = o2.oyuncununHamlesiniAl();
-					hamleKontrolu2 = tahta.hamleyiYaz(hamle2.substring(0, 2), hamle2.substring(3).charAt(0),
-							o2.insanmiKontrolu);
+					hamleKontrolu2 = tahta.hamleyiYaz(hamle2.substring(0, 2), hamle2.charAt(3), o2.insanmiKontrolu);
 				}
 			} catch (Exception e) {
 				System.err.println("Birþeyler yanlýþ gitti");

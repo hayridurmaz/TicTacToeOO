@@ -1,6 +1,8 @@
+
 import java.util.Scanner;
 
 public class Oyuncu {
+
 	/*
 	 * Bu Class Oyuncu'larý temsil etmektedir.
 	 */
@@ -37,6 +39,20 @@ public class Oyuncu {
 			karakter = 'X';
 		} else {
 			kullaniciAdi = "PC";
+			karakter = 'O';
+		}
+	}
+
+	public Oyuncu(String kAdi, boolean insanmi, Tahta t) {
+		// insanMý kontrolünü ve oyun tahtasýný parametre olarak alan yapýcý.
+		insanmiKontrolu = insanmi;
+		tahta = t;
+
+		if (insanmi) {
+			kullaniciAdi = kAdi;
+			karakter = 'X';
+		} else {
+			kullaniciAdi = kAdi;
 			karakter = 'O';
 		}
 	}
@@ -92,8 +108,9 @@ public class Oyuncu {
 	String oyuncununHamlesiniAl() {
 		if (insanmiKontrolu) {
 			return insanOyuncuHamlesiniKotrol();
-		} else
+		} else {
 			return bilgisayarHamlesiUret();
+		}
 	}
 
 	static int randomWithRange(int min, int max) {
